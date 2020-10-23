@@ -1,37 +1,12 @@
-## Welcome to GitHub Pages
+# convert_from_webp
+Usage:
+```convert_from_webp ```<*file1.webp*> <*file2.webp*> . . .
 
-You can use the [editor on GitHub](https://github.com/furryfixer/convert_from_webp/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+A bash script to convert EITHER or BOTH .webp images or animations to other formats.
+- **Will differentiate between still pics and animations**
+- **Will process multiple files, allowing mixture of pics/animations**
+- **Will average frame delay/duration where variable in webp animations to better approximate original playback speed**
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This script is not particularly fast, both because it is bash, but also because it averages the frame durations to process webp animations.  This creates better results for webp animations that vary delay times between frames. The script requires at least "**libwebp-tools**", and optionally, "**libnotify**". Basenames or full pathnames may be used, but arguments must be files, not directories (no recursion). Default ouput formats are **PNG** for pics and **GIF** for animations. This may be changed by editing the first two lines after the comments in the script.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/furryfixer/convert_from_webp/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+The script works fine from the command line but was created to be used as a "custom action" in thunar after the selectiion one or more webp files in a directory.  To use, download to **/usr/local/bin** or **/user/bin** and give exectuable permission.
