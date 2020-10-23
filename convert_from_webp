@@ -2,13 +2,13 @@
 #####################################################################
 # CONVERT_FROM_WEBP by furryfixer
 #
-# A bash script to convert EIHTER or BOTH .webp images or animations
+# A bash script to convert EITHER or BOTH .webp images or animations
 # to other formats.
 #  * Will differentiate between still pics and animations
 #  * Will process multiple files, allowing mixture of pics/animations
 #  * Will average frame delay/duration if variable in webp
 #      animations to better approximate original playback speed
-# Requires "libwebp-tools" and optionally. Basenames or
+# Requires "libwebp-tools" and optionally, libnotify. Basenames or
 # full pathnames may be used, but arguments must be files,
 # not directories (no recursion). Default ouput formats are:
 # PNG for pics and GIF for animations. Change in first two lines 
