@@ -28,9 +28,10 @@ while (( "$#" )); do
    basenm=`basename $prefix`
    n=`webpinfo -summary $full_filename | grep frames | sed -e 's/.* \([0-9]*\)$/\1/'`
    if [[ $n -eq 1 ]]; then
-      dwebp $prefix.webp -o $prefix.png
       ext=$pic_ext
+      dwebp $prefix.webp -o $prefix.$ext
    else
+      ext=$animation_ext
       webpinfo -summary $full_filename | grep Duration | sed -e 's/.* \([0-9]*\)$/\1/g' > /tmp/webp_durs
       if [[ $dlay -eq 0 ]]; then
          while read -r dur; do      # sum and average durations if not all same
@@ -39,7 +40,7 @@ while (( "$#" )); do
          ms_delay=$((sum_dur / n + 5)) # add 5 to round properly below (not floating-point)
          dlay=$((ms_delay / 10))
       fi
-      convert -delay $dlay -dispose none $full_filename -coalesce -loop $loops -layers optimize $prefix.gif
+      convert -delay $dlay -dispose none $full_filename -coalesce -loop $loops -layers optimize $prefix.$ext
       ext=$animation_ext
    fi
    notify-send "Converted "$basenm".webp to "$basenm"."$ext
