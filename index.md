@@ -58,4 +58,5 @@ while (( "$#" )); do
    notify-send "Converted "$basenm".webp to "$basenm"."$ext
    echo "Converted "$basenm".webp to "$basenm.$ext
    shift
+done
 ```
