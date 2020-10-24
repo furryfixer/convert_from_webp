@@ -41,7 +41,6 @@ while (( "$#" )); do
          dlay=$((ms_delay / 10))
       fi
       convert -delay $dlay -dispose none $full_filename -coalesce -loop $loops -layers optimize $prefix.$ext
-      ext=$animation_ext
    fi
    notify-send "Converted "$basenm".webp to "$basenm"."$ext
    echo "Converted "$basenm".webp to "$basenm.$ext
