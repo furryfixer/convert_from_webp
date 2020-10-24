@@ -21,7 +21,7 @@ The script works fine from the command line but was created to be used as a "cus
 #  * Will process multiple files, allowing mixture of pics/animations
 #  * Will average frame delay/duration if variable in webp
 #      animations to better approximate original playback speed
-# Requires "libwebp-tools" and optionally, libnotify. Basenames or
+# Requires "libwebp-tools" and optionally, "libnotify". Basenames or
 # full pathnames may be used, but arguments must be files,
 # not directories (no recursion). Default ouput formats are:
 # PNG for pics and GIF for animations. Change in first two lines 
@@ -41,9 +41,10 @@ while (( "$#" )); do
    basenm=`basename $prefix`
    n=`webpinfo -summary $full_filename | grep frames | sed -e 's/.* \([0-9]*\)$/\1/'`
    if [[ $n -eq 1 ]]; then
-      dwebp $prefix.webp -o $prefix.png
       ext=$pic_ext
+      dwebp $prefix.webp -o $prefix.$ext
    else
+      ext=$animation_ext
       webpinfo -summary $full_filename | grep Duration | sed -e 's/.* \([0-9]*\)$/\1/g' > /tmp/webp_durs
       if [[ $dlay -eq 0 ]]; then
          while read -r dur; do      # sum and average durations if not all same
@@ -52,8 +53,7 @@ while (( "$#" )); do
          ms_delay=$((sum_dur / n + 5)) # add 5 to round properly below (not floating-point)
          dlay=$((ms_delay / 10))
       fi
-      convert -delay $dlay -dispose none $full_filename -coalesce -loop $loops -layers optimize $prefix.gif
-      ext=$animation_ext
+      convert -delay $dlay -dispose none $full_filename -coalesce -loop $loops -layers optimize $prefix.$ext
    fi
    notify-send "Converted "$basenm".webp to "$basenm"."$ext
    echo "Converted "$basenm".webp to "$basenm.$ext
