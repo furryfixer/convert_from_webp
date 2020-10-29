@@ -2,7 +2,7 @@
 Usage:
 ```convert_from_webp ```<*file1.webp*> <*file2.webp*> . . .
 
-A bash script to convert EITHER or BOTH .webp images or animations to other formats.
+A bash script which allows linux users to convert EITHER or BOTH .webp images or animations to other formats.
 - **Will differentiate between still pics and animations**
 - **Will process multiple files, allowing mixture of pics/animations**
 - **Will average frame delay/duration where variable in webp animations to better approximate original playback speed**
